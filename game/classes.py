@@ -8,17 +8,17 @@ class Character:
 
 	def __init__(self, x, y, width, height, images, xoffset=0, yoffset=0):
 
-		self.rect = Rect(x , y, width, height)
+		self.hitbox = HitBox(x, y, width, height, top_ffset=4, height_offset=6) #Rect(x , y, width, height)
 		self.xoffset = xoffset
 		self.yoffset = yoffset
 		self.images = images
 		self.imageCounter = 0
 		self.loadedImage = load(self.images['idle'][self.imageCounter]).convert_alpha()
 		self.velocity = 0
-		self.y_velocity = 0
+		self.y_velocity = 5
 		self.animation_counter = 0
 		self.gravitational_force = 3
-		self.jump_counter = 10
+		self.jump_counter = 0
 		self.is_jumping = False
 
 
@@ -33,7 +33,7 @@ class Character:
 
 
 	def move_horizontale(self):
-		self.rect.x += self.velocity
+		self.hitbox.rect.x += self.velocity
 		self.animation_counter += 1
 
 		if self.animation_counter > 3:
@@ -47,12 +47,34 @@ class Character:
 
 
 	def gravity(self):
-		self.rect.y += self.gravitational_force
-
+		self.hitbox.rect.y += self.gravitational_force
 
 	def jump(self):
-		self.rect.y -= self.y_velocity
+		self.hitbox.rect.y -= self.y_velocity 
 
+	def jumping_system(self):
+		if not self.is_jumping:
+			self.gravity()
+		elif self.jump_counter < 10:
+			self.jump()
+			self.jump_counter += 1
+		else:
+			self.jump_counter = 0
+			self.is_jumping = False
+
+# redhair.gravity()
+			# if redhair.is_jumping:
+			# 	if redhair.jump_counter == 0:
+			# 		redhair.gravitational_force = 0
+			# 	if redhair.jump_counter < 10:
+			# 		redhair.jump()
+			# 		redhair.jump_counter += 1
+			# 		if redhair.jump_counter % 2 == 0:
+			# 			redhair.gravitational_force += 1
+			# 	else:
+			# 		redhair.jump_counter = 0
+			# 		redhair.is_jumping = False
+			# 		redhair.gravitational_force += 1
 
 
 
@@ -78,13 +100,25 @@ class Background:
 
 
 
-
+# x,y
+# top, left, bottom, right
+# topleft, bottomleft, topright, bottomright
+# midtop, midleft, midbottom, midright
+# center, centerx, centery
+# size, width, height
+# w,h
 
 class HitBox:
 
-	def __init__(self, x, y, width, height, image=None):
+	def __init__(self, x, y, width, height, image=None, top_ffset=0, height_offset=0):
 
 		self.rect = Rect(x, y, width, height)
+		self.top_rect = Rect(self.rect.left, self.rect.midtop[1], self.rect.w, 1)
+		self.bottom_rect = Rect(self.rect.left, self.rect.midbottom[1], self.rect.w, 1)
+		self.righ_rect = Rect(self.rect.midright[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
+		self.left_rect = Rect(self.rect.midleft[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
+		# offsets here are to keep the hitbox smooth
+
 		if image:
 			self.image = load(image)
 

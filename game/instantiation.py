@@ -54,7 +54,7 @@ backgrounds = [
 # Hitboxes / Surfaces
 
 surface1 = HitBox(0 - 12000 / 2, height - 43, 12000, 43)
-crate1 = HitBox(width - 100, surface1.rect.top - 35, 39, 35, 'game/assets/crate.png')
+crate1 = HitBox(100, surface1.rect.top - 35, 39, 35, 'game/assets/crate.png', 4, 6)
 
 
 
