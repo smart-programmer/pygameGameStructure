@@ -46,6 +46,8 @@ class Character:
 			elif self.velocity == 0:
 				self.animation('idle')
 
+			# if you want a more robust system don't call animation here but call it in the game loop so you can call it for any animation you want
+
 
 	def gravity(self):
 		self.hitbox.rect.y += self.gravitational_force
@@ -133,7 +135,7 @@ class Game:
 
 	def __init__(self, images):
 		self.images = images
-		self.index_of_hit_list = 0
+		self.indices_of_hit_list = []
 
 	def load_image(self, index):
 		image = self.images[index]

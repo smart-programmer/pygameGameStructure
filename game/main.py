@@ -33,9 +33,10 @@ def main():
 				elif event.key == pygame.K_a:
 					redhair.velocity -= 4
 				elif event.key == pygame.K_w:
-					if game.index_of_hit_list != -1:
-						if redhair.hitbox.bottom_rect.colliderect(surfaces[game.index_of_hit_list]):
-							redhair.is_jumping = True
+					if len(game.indices_of_hit_list) != 0:
+						for index in game.indices_of_hit_list:
+							if redhair.hitbox.bottom_rect.colliderect(surfaces[index]):
+								redhair.is_jumping = True
 
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_d:
@@ -57,27 +58,30 @@ def main():
 			# if redhair.hitbox.rect.colliderect(surfaces[0]):
 			# 	redhair.hitbox.rect.bottom = surfaces[0].rect.top
 			# if redhair.hitbox.rect.collidelist(surfaces):
-			if redhair.hitbox.rect.collidelist(surfaces) != -1:
-				game.index_of_hit_list = redhair.hitbox.rect.collidelist(surfaces)
-				print(game.index_of_hit_list)
-				if redhair.hitbox.rect.colliderect(surfaces[game.index_of_hit_list].right_rect):
-					redhair.hitbox.rect.left = surfaces[game.index_of_hit_list].right_rect.left
-				elif redhair.hitbox.rect.colliderect(surfaces[game.index_of_hit_list].left_rect):
-					redhair.hitbox.rect.right = surfaces[game.index_of_hit_list].left_rect.left
-				elif redhair.hitbox.rect.colliderect(surfaces[game.index_of_hit_list].top_rect):
-					redhair.hitbox.rect.bottom = surfaces[game.index_of_hit_list].top_rect.top
-				elif redhair.hitbox.rect.colliderect(surfaces[game.index_of_hit_list].bottom_rect):
-					redhair.hitbox.rect.top = surfaces[game.index_of_hit_list].bottom_rect.top
+			if len(redhair.hitbox.rect.collidelistall(surfaces)) != 0:
+
+				game.indices_of_hit_list = redhair.hitbox.rect.collidelistall(surfaces)
+				print(game.indices_of_hit_list)
+				for index in game.indices_of_hit_list:
+
+					if redhair.hitbox.rect.colliderect(surfaces[index].right_rect):
+						redhair.hitbox.rect.left = surfaces[index].right_rect.left
+					elif redhair.hitbox.rect.colliderect(surfaces[index].left_rect):
+						redhair.hitbox.rect.right = surfaces[index].left_rect.left
+					elif redhair.hitbox.rect.colliderect(surfaces[index].top_rect):
+						redhair.hitbox.rect.bottom = surfaces[index].top_rect.top
+					elif redhair.hitbox.rect.colliderect(surfaces[index].bottom_rect):
+						redhair.hitbox.rect.top = surfaces[index].bottom_rect.top
 
 				
 
 
-			pygame.draw.rect(screen, (255, 255, 0), surfaces[0].top_rect, 2)
-			pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.rect, 2)
-			pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.top_rect, 2)
-			pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.bottom_rect, 2)
-			pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.right_rect, 2)
-			pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.left_rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), surfaces[0].top_rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.top_rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.bottom_rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.right_rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.left_rect, 2)
 			screen.blit(surfaces[1].image, (surfaces[1].rect.x, surfaces[1].rect.y))
 			# screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))
 			screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))

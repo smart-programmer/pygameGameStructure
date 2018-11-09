@@ -69,5 +69,9 @@ tops = [surface1]
 
 # Game
 game = Game(images=['game/assets/instructions2.png'])
-
+game.images.append('game/assets/Pixel Art Plataformer Painted Style.png')
+game.images.append('game/assets/Pixel Art Runner.png')
+game.images.append('game/assets/Pixel Art Forest.png')
+game.images.append('game/assets/Pixel Art Snowy Forest.png')
+game.images.append('game/assets/game.jpg')
 
