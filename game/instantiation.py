@@ -23,28 +23,70 @@ redhair = Character(width-100, 100, 22, 34, redhair_images, -19, -16)
 
 
 # backgrounds
+backgrounds = []
 
-layer1 = Background('game/assets/layer1.png', 0, -99, 928, 793, '1') 
-layer2 = Background('game/assets/layer2.png', 0, -99, 928, 793, '2') 
-layer3 = Background('game/assets/layer3.png', 0, -99, 928, 793, '3') 
-layer4 = Background('game/assets/layer4.png', 0, -99, 928, 793, '4') 
-layer5 = Background('game/assets/layer5.png', 0, -99, 928, 793, '5') 
-layer6 = Background('game/assets/layer6.png', 0, -99, 928, 793, '6') 
-layer7 = Background('game/assets/layer7.png', 0, -99, 928, 793, '7') 
-layer8 = Background('game/assets/layer8.png', 0, -99, 928, 793, '8') 
-layer9 = Background('game/assets/layer9.png', 0, -99, 928, 793, '9') 
 
-backgrounds = [
-	layer1,
-	layer2,
-	layer3,
-	layer4,
-	layer5,
-	layer6,
-	layer7,
-	layer8,
-	layer9
-	]
+for i in range(9):
+	for j in range(7):
+		if i == 1:
+			backgrounds.append(Background('game/assets/layer1.png', (928 * j) - 928, -99, 928, 793, 1))
+		elif i == 2:
+			backgrounds.append(Background('game/assets/layer2.png', (928 * j) - 928, -99, 928, 793, 2))
+		elif i == 3:
+			backgrounds.append(Background('game/assets/layer3.png', (928 * j) - 928, -99, 928, 793, 3))
+		elif i == 4:
+			backgrounds.append(Background('game/assets/layer4.png', (928 * j) - 928, -99, 928, 793, 4))
+		elif i == 5:
+			backgrounds.append(Background('game/assets/layer5.png', (928 * j) - 928, -99, 928, 793, 5))
+		elif i == 6:
+			backgrounds.append(Background('game/assets/layer6.png', (928 * j) - 928, -99, 928, 793, 6))
+		elif i == 7:
+			backgrounds.append(Background('game/assets/layer7.png', (928 * j) - 928, -99, 928, 793, 7))
+		elif i == 8:
+			backgrounds.append(Background('game/assets/layer8.png', (928 * j) - 928, -99, 928, 793, 8))
+		elif i == 9:
+			backgrounds.append(Background('game/assets/layer9.png', (928 * j) - 928, -99, 928, 793, 9))
+
+
+# layer1 = Background('game/assets/layer1.png', 0, -99, 928, 793, 1) 
+# layer1_2 = Background('game/assets/layer1.png', layer1.width, -99, 928, 793, 1)
+# layer2 = Background('game/assets/layer2.png', 0, -99, 928, 793, 2) 
+# layer2_2 = Background('game/assets/layer2.png', layer2.width, -99, 928, 793, 2) 
+# layer3 = Background('game/assets/layer3.png', 0, -99, 928, 793, 3) 
+# layer3_2 = Background('game/assets/layer3.png', layer3.width, -99, 928, 793, 3) 
+# layer4 = Background('game/assets/layer4.png', 0, -99, 928, 793, 4) 
+# layer4_2 = Background('game/assets/layer4.png', layer4.width, -99, 928, 793, 4) 
+# layer5 = Background('game/assets/layer5.png', 0, -99, 928, 793, 5) 
+# layer5_2 = Background('game/assets/layer5.png', layer5.width, -99, 928, 793, 5) 
+# layer6 = Background('game/assets/layer6.png', 0, -99, 928, 793, 6) 
+# layer6_2 = Background('game/assets/layer6.png', layer6.width, -99, 928, 793, 6) 
+# layer7 = Background('game/assets/layer7.png', 0, -99, 928, 793, 7) 
+# layer7_2 = Background('game/assets/layer7.png', layer7.width, -99, 928, 793, 7) 
+# layer8 = Background('game/assets/layer8.png', 0, -99, 928, 793, 8) 
+# layer8_2 = Background('game/assets/layer8.png', layer8.width, -99, 928, 793, 8) 
+# layer9 = Background('game/assets/layer9.png', 0, -99, 928, 793, 9) 
+# layer9_2 = Background('game/assets/layer9.png', layer9.width, -99, 928, 793, 9) 
+
+# backgrounds = [
+# 	layer1,
+# 	layer1_2,
+# 	layer2,
+# 	layer2_2,
+# 	layer3,
+# 	layer3_2,
+# 	layer4,
+# 	layer4_2,
+# 	layer5,
+# 	layer5_2,
+# 	layer6,
+# 	layer6_2,
+# 	layer7,
+# 	layer7_2,
+# 	layer8,
+# 	layer8_2,
+# 	layer9,
+# 	layer9_2
+# 	]
 
 
 
@@ -74,4 +116,5 @@ game.images.append('game/assets/Pixel Art Runner.png')
 game.images.append('game/assets/Pixel Art Forest.png')
 game.images.append('game/assets/Pixel Art Snowy Forest.png')
 game.images.append('game/assets/game.jpg')
+game.backgrounds = backgrounds
 

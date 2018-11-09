@@ -13,6 +13,7 @@ clock = pygame.time.Clock()
 
 def main():
 
+	global surfaces
 	
 	while True:
 		x = redhair.hitbox.rect.x
@@ -49,9 +50,15 @@ def main():
 			redhair.jumping_system()
 
 
-			draw_backgrounds()
+			draw_backgrounds(game.backgrounds, screen)
 			# draw_hitboxes()
 			redhair.move_horizontale()
+			if redhair.velocity < 0:
+				# game.scene_move_backgrounds('right')
+				surfaces = game.move_world(surfaces, 9, 'right')
+			elif redhair.velocity > 0:
+				# game.scene_move_backgrounds('left')
+				surfaces = game.move_world(surfaces, -9, 'left')
 
 
 			# put to three rects around every object that way you know which side the player is hitting by testing which rects of the three he's colliding with the top one or the left on or the right one
@@ -82,11 +89,11 @@ def main():
 			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.bottom_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.right_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.left_rect, 2)
-			screen.blit(surfaces[1].image, (surfaces[1].rect.x, surfaces[1].rect.y))
+			screen.blit(surfaces[1].load_image, (surfaces[1].rect.x, surfaces[1].rect.y))
 			# screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))
 			screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))
 			# # pygame.draw.rect(screen, (255, 255, 0), surfaces[1], 2)
-			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].bottom_rect, 2)
+			pygame.draw.rect(screen, (255, 255, 0), surfaces[1].bottom_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].right_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].left_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].top_rect, 2)

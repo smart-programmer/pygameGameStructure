@@ -102,8 +102,8 @@ class Background:
 
 
 
-	def scroll(self):
-		pass
+	def scroll(self, speed):
+		self.x += speed
 
 
 
@@ -125,9 +125,10 @@ class HitBox:
 		self.right_rect = Rect(self.rect.midright[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
 		self.left_rect = Rect(self.rect.midleft[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
 		# offsets here are to keep the hitbox smooth
+		self.image = image
 
 		if image:
-			self.image = load(image)
+			self.load_image = load(image).convert_alpha()
 
 
 
@@ -136,8 +137,24 @@ class Game:
 	def __init__(self, images):
 		self.images = images
 		self.indices_of_hit_list = []
+		self.backgrounds = []
 
 	def load_image(self, index):
 		image = self.images[index]
-		return load(image)
+		return load(image).convert_alpha()
+
+	def scene_move_backgrounds(self, direction):
+		for background in self.backgrounds:
+			if direction == "right":
+				background.scroll(background.layer)
+			else:
+				background.scroll(-background.layer)
+
+	def move_world(self, objects, speed, direction):
+		self.scene_move_backgrounds(direction)
+		for index, obj in enumerate(objects):
+			obj.rect.x += speed
+			objects[index] = HitBox(obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height, obj.image, 4, 6)
+
+		return objects
 
