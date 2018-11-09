@@ -34,6 +34,7 @@ class Character:
 
 	def move_horizontale(self):
 		self.hitbox.rect.x += self.velocity
+		self.hitbox = HitBox(self.hitbox.rect.x, self.hitbox.rect.y, self.hitbox.rect.width, self.hitbox.rect.height, top_ffset=4, height_offset=6)
 		self.animation_counter += 1
 
 		if self.animation_counter > 3:
@@ -49,8 +50,12 @@ class Character:
 	def gravity(self):
 		self.hitbox.rect.y += self.gravitational_force
 
+		if self.gravitational_force != 0:
+			self.hitbox = HitBox(self.hitbox.rect.x, self.hitbox.rect.y, self.hitbox.rect.width, self.hitbox.rect.height, top_ffset=4, height_offset=6)
+
 	def jump(self):
 		self.hitbox.rect.y -= self.y_velocity 
+		self.hitbox = HitBox(self.hitbox.rect.x, self.hitbox.rect.y, self.hitbox.rect.width, self.hitbox.rect.height, top_ffset=4, height_offset=6)
 
 	def jumping_system(self):
 		if not self.is_jumping:
@@ -115,7 +120,7 @@ class HitBox:
 		self.rect = Rect(x, y, width, height)
 		self.top_rect = Rect(self.rect.left, self.rect.midtop[1], self.rect.w, 1)
 		self.bottom_rect = Rect(self.rect.left, self.rect.midbottom[1], self.rect.w, 1)
-		self.righ_rect = Rect(self.rect.midright[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
+		self.right_rect = Rect(self.rect.midright[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
 		self.left_rect = Rect(self.rect.midleft[0], self.rect.top + top_ffset, 1, self.rect.h - height_offset)
 		# offsets here are to keep the hitbox smooth
 
@@ -126,9 +131,9 @@ class HitBox:
 
 class Game:
 
-	def __init__(self):
-		self.screen = 'intro'
-		self.images = []
+	def __init__(self, images):
+		self.images = images
+		self.index_of_hit_list = 0
 
 	def load_image(self, index):
 		image = self.images[index]

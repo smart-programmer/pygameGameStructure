@@ -68,5 +68,6 @@ tops = [surface1]
 
 
 # Game
-game = Game()
-game.images.append('game/assets/instructions2.png')
+game = Game(images=['game/assets/instructions2.png'])
+
+
