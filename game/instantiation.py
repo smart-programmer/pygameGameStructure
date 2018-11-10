@@ -29,21 +29,21 @@ backgrounds = []
 for i in range(9):
 	for j in range(6):
 		if i == 1:
-			backgrounds.append(Background('game/assets/layer1.png', (928 * j) - 928, -99, 928, 793, 1, 0))
+			backgrounds.append(Background('game/assets/layer1.png', (928 * j) - 928, -55, 928, 793, 1, 0))
 		elif i == 2:
-			backgrounds.append(Background('game/assets/layer2.png', (928 * j) - 928, -99, 928, 793, 2, 1))
+			backgrounds.append(Background('game/assets/layer2.png', (928 * j) - 928, -55, 928, 793, 2, 1))
 		elif i == 3:
-			backgrounds.append(Background('game/assets/layer3.png', (928 * j) - 928, -99, 928, 793, 3, 2))
+			backgrounds.append(Background('game/assets/layer3.png', (928 * j) - 928, -55, 928, 793, 3, 2))
 		elif i == 4:
-			backgrounds.append(Background('game/assets/layer4.png', (928 * j) - 928, -99, 928, 793, 4, 3))
+			backgrounds.append(Background('game/assets/layer4.png', (928 * j) - 928, -55, 928, 793, 4, 3))
 		elif i == 5:
-			backgrounds.append(Background('game/assets/layer5.png', (928 * j) - 928, -99, 928, 793, 5, 4))
+			backgrounds.append(Background('game/assets/layer5.png', (928 * j) - 928, -55, 928, 793, 5, 4))
 		elif i == 6:
-			backgrounds.append(Background('game/assets/layer6.png', (928 * j) - 928, -99, 928, 793, 6, 5))
+			backgrounds.append(Background('game/assets/layer6.png', (928 * j) - 928, -55, 928, 793, 6, 5))
 		elif i == 7:
-			backgrounds.append(Background('game/assets/layer7.png', (928 * j) - 928, -99, 928, 793, 7, 5))
+			backgrounds.append(Background('game/assets/layer7.png', (928 * j) - 928, -55, 928, 793, 7, 5))
 		elif i == 8:
-			backgrounds.append(Background('game/assets/layer8.png', (928 * j) - 928, -99, 928, 793, 8, 6))
+			backgrounds.append(Background('game/assets/layer8.png', (928 * j) - 928, -55, 928, 793, 8, 6))
 		elif i == 9:
 			backgrounds.append(Background('game/assets/layer9.png', (928 * j) - 928, -99, 928, 793, 9, 6))
 
