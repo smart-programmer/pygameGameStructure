@@ -27,7 +27,7 @@ backgrounds = []
 
 
 for i in range(9):
-	for j in range(10):
+	for j in range(6):
 		if i == 1:
 			backgrounds.append(Background('game/assets/layer1.png', (928 * j) - 928, -99, 928, 793, 1, 0))
 		elif i == 2:
@@ -97,10 +97,12 @@ for i in range(9):
 
 surface1 = HitBox(-111, height - 43, 12000, 43)
 crate1 = HitBox(width - 100, surface1.rect.top - 35, 39, 35, 'game/assets/crate.png', 4, 6)
+crate2 = HitBox(1961, surface1.rect.top - 35, 39, 35, 'game/assets/crate.png', 4, 6)
+wagon = HitBox(2000, surface1.rect.top - 73, 93, 75, 'game/assets/wagon.png', 4, 6)
 
 
 
-surfaces = [surface1, crate1]
+surfaces = [surface1, crate1, crate2, wagon]
 tops = [surface1]
 
 

@@ -2,7 +2,7 @@ from pygame.display import set_mode
 import pygame
 from win32api import GetSystemMetrics
 
-width = 928
+width = GetSystemMetrics(0)
 height = GetSystemMetrics(1) - 95
 
 

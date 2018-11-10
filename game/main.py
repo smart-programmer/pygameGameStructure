@@ -14,6 +14,7 @@ clock = pygame.time.Clock()
 def main():
 
 	global surfaces
+	scene = 6
 	
 	while True:
 		x = redhair.hitbox.rect.x
@@ -94,12 +95,16 @@ def main():
 			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.bottom_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.right_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), redhair.hitbox.left_rect, 2)
-			screen.blit(surfaces[1].load_image, (surfaces[1].rect.x, surfaces[1].rect.y))
+			# screen.blit(surfaces[1].load_image, (surfaces[1].rect.x, surfaces[1].rect.y))
+			for surface in surfaces:
+				if surface.image:
+					screen.blit(surface.load_image, (surface.rect.x, surface.rect.y))
+
 			# screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))
 			screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))
 			# # pygame.draw.rect(screen, (255, 255, 0), surfaces[1], 2)
-			pygame.draw.rect(screen, (255, 255, 0), surfaces[1].bottom_rect, 2)
-			pygame.draw.rect(screen, (255, 255, 0), game.game_boundaries[0], 2)
+			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].bottom_rect, 2)
+			# pygame.draw.rect(screen, (255, 255, 0), game.game_boundaries[0], 2)
 			# pygame.draw.rect(screen, (255, 255, 0), game.game_boundaries[1], 2)
 			# pygame.draw.rect(screen, (255, 255, 0), game.boundaries[0], 2)
 			# pygame.draw.rect(screen, (255, 255, 0), game.boundaries[1], 2)
@@ -113,7 +118,7 @@ def main():
 
 
 		pygame.display.update()
-		clock.tick(60)
+		clock.tick(100)
 
 
 

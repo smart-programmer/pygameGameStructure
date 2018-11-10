@@ -144,21 +144,26 @@ class Game:
 		self.backgrounds = []
 		self.screen_width = screen_width
 		self.screen_height = screen_height
-		self.scroll_boundaries = [Rect(100, -screen_height, 1, screen_height * 2), Rect(screen_width - 300, -screen_height, 1, screen_height * 2)]
-		self.game_boundaries = [HitBox(-110, -screen_height, 1, screen_height * 2)]
+		self.scroll_boundaries = [Rect(100, -screen_height, 1, screen_height * 2), Rect(screen_width - 500, -screen_height, 1, screen_height * 2)]
+		self.game_boundaries = [HitBox(-110, -screen_height, 1, screen_height * 2), HitBox(4600, -screen_height, 1, screen_height * 2)]
 
 	def load_image(self, index):
 		image = self.images[index]
 		return load(image).convert_alpha()
 
-	def scene_move_backgrounds(self, direction):
+	def move_backgrounds(self, direction):
 		for background in self.backgrounds:
 			background.scroll(direction)
+
+	def move_game_boundaries(self, speed):
+		for i in self.game_boundaries:
+			i.rect.x += speed
 			
 
 	def move_world(self, objects, speed, direction):
-		self.scene_move_backgrounds(direction)
-		objects += self.game_boundaries
+		self.move_backgrounds(direction)
+		# objects += self.game_boundaries
+		self.move_game_boundaries(speed)
 		for index, obj in enumerate(objects):
 			obj.rect.x += speed
 			objects[index] = HitBox(obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height, obj.image, 4, 6)
