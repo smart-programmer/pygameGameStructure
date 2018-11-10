@@ -9,6 +9,6 @@ height = GetSystemMetrics(1) - 30 #70 if you want the ui tape to appear or make 
 
 
 screen = set_mode((width, height))
-load = pygame.image.load('game/assets/load.jpeg')
-screen.blit(load, (270, 265))
+load = pygame.image.load('game/assets/loading.jpg')
+screen.blit(load, ((width / 2) - 180, 265))
 pygame.display.update()
