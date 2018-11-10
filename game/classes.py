@@ -91,7 +91,7 @@ class Character:
 
 class Background:
 
-	def __init__(self, image, x, y, width, height, layer):
+	def __init__(self, image, x, y, width, height, layer, scroll_speed):
 
 		self.image = load(image).convert_alpha() # .convert_alpha() for faster bliting speed more on that here https://gamedev.stackexchange.com/questions/81280/pygame-surfaces-which-and-when-do-i-need-to-convert
 		self.x = x
@@ -99,11 +99,15 @@ class Background:
 		self.width = width
 		self.height = height
 		self.layer = layer
+		self.scroll_speed = scroll_speed
 
 
 
-	def scroll(self, speed):
-		self.x += speed
+	def scroll(self, direction):
+		if direction == 'right':
+			self.x += self.scroll_speed
+		else:
+			self.x -= self.scroll_speed
 
 
 
@@ -134,10 +138,14 @@ class HitBox:
 
 class Game:
 
-	def __init__(self, images):
+	def __init__(self, images, screen_width, screen_height):
 		self.images = images
 		self.indices_of_hit_list = []
 		self.backgrounds = []
+		self.screen_width = screen_width
+		self.screen_height = screen_height
+		self.scroll_boundaries = [Rect(100, -screen_height, 1, screen_height * 2), Rect(screen_width - 300, -screen_height, 1, screen_height * 2)]
+		self.game_boundaries = [HitBox(-110, -screen_height, 1, screen_height * 2)]
 
 	def load_image(self, index):
 		image = self.images[index]
@@ -145,16 +153,44 @@ class Game:
 
 	def scene_move_backgrounds(self, direction):
 		for background in self.backgrounds:
-			if direction == "right":
-				background.scroll(background.layer)
-			else:
-				background.scroll(-background.layer)
+			background.scroll(direction)
+			
 
 	def move_world(self, objects, speed, direction):
 		self.scene_move_backgrounds(direction)
+		objects += self.game_boundaries
 		for index, obj in enumerate(objects):
 			obj.rect.x += speed
 			objects[index] = HitBox(obj.rect.x, obj.rect.y, obj.rect.width, obj.rect.height, obj.image, 4, 6)
 
 		return objects
+
+	def start_scrolling_world(self, scroller):
+		direction = None
+		speed = None
+		boundary = scroller.hitbox.rect.collidelist(self.scroll_boundaries)
+		if scroller.velocity != 0:
+			if boundary != -1:
+					if boundary == 0:
+						scroller.hitbox.rect.left = self.scroll_boundaries[0].left
+						direction = 'right'
+						speed = -6
+					else:
+						scroller.hitbox.rect.right = self.scroll_boundaries[1].left
+						direction = 'left'
+						speed = 6
+
+					return True, direction, speed
+
+		return False, direction, speed
+
+	def hit_game_boundary(self, obj):
+		boundary = obj.hitbox.rect.collidelist(self.game_boundaries)
+		if boundary != -1:
+			if boundary == 0:
+				obj.hitbox.rect.left = self.game_boundaries[0].rect.left
+			elif boundary == 1:
+				obj.hitbox.rect.right = self.game_boundaries[1].rect.left
+
+
 

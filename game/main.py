@@ -47,18 +47,24 @@ def main():
 					redhair.velocity += 4
 
 		if len(game.images) == 0:
+			game.hit_game_boundary(redhair)
+
+
 			redhair.jumping_system()
 
 
 			draw_backgrounds(game.backgrounds, screen)
 			# draw_hitboxes()
 			redhair.move_horizontale()
-			if redhair.velocity < 0:
-				# game.scene_move_backgrounds('right')
-				surfaces = game.move_world(surfaces, 9, 'right')
-			elif redhair.velocity > 0:
-				# game.scene_move_backgrounds('left')
-				surfaces = game.move_world(surfaces, -9, 'left')
+			# if redhair.velocity < 0:
+			# 	# game.scene_move_backgrounds('right')
+			# 	surfaces = game.move_world(surfaces, 9, 'right')
+			# elif redhair.velocity > 0:
+			# 	# game.scene_move_backgrounds('left')
+			# 	surfaces = game.move_world(surfaces, -9, 'left')
+			start, direction, speed = game.start_scrolling_world(redhair)
+			if start:
+				game.move_world(surfaces, -speed, direction)
 
 
 			# put to three rects around every object that way you know which side the player is hitting by testing which rects of the three he's colliding with the top one or the left on or the right one
@@ -68,7 +74,6 @@ def main():
 			if len(redhair.hitbox.rect.collidelistall(surfaces)) != 0:
 
 				game.indices_of_hit_list = redhair.hitbox.rect.collidelistall(surfaces)
-				print(game.indices_of_hit_list)
 				for index in game.indices_of_hit_list:
 
 					if redhair.hitbox.rect.colliderect(surfaces[index].right_rect):
@@ -94,6 +99,10 @@ def main():
 			screen.blit(redhair.loadedImage, (redhair.hitbox.rect.x + redhair.xoffset, redhair.hitbox.rect.y + redhair.yoffset))
 			# # pygame.draw.rect(screen, (255, 255, 0), surfaces[1], 2)
 			pygame.draw.rect(screen, (255, 255, 0), surfaces[1].bottom_rect, 2)
+			pygame.draw.rect(screen, (255, 255, 0), game.game_boundaries[0], 2)
+			# pygame.draw.rect(screen, (255, 255, 0), game.game_boundaries[1], 2)
+			# pygame.draw.rect(screen, (255, 255, 0), game.boundaries[0], 2)
+			# pygame.draw.rect(screen, (255, 255, 0), game.boundaries[1], 2)
 			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].right_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].left_rect, 2)
 			# pygame.draw.rect(screen, (255, 255, 0), surfaces[1].top_rect, 2)

@@ -18,7 +18,7 @@ redhair_images = {'idle':['game/assets/Character_01_Idle1.png', 'game/assets/Cha
  'game/assets/left_r9.png', 'game/assets/left_r10.png', 'game/assets/left_r11.png', 'game/assets/left_r12.png',
  'game/assets/left_r13.png', 'game/assets/left_r14.png', 'game/assets/left_r15.png']}
 
-redhair = Character(width-100, 100, 22, 34, redhair_images, -19, -16)
+redhair = Character(100, 100, 22, 34, redhair_images, -19, -16)
 
 
 
@@ -27,25 +27,25 @@ backgrounds = []
 
 
 for i in range(9):
-	for j in range(7):
+	for j in range(10):
 		if i == 1:
-			backgrounds.append(Background('game/assets/layer1.png', (928 * j) - 928, -99, 928, 793, 1))
+			backgrounds.append(Background('game/assets/layer1.png', (928 * j) - 928, -99, 928, 793, 1, 0))
 		elif i == 2:
-			backgrounds.append(Background('game/assets/layer2.png', (928 * j) - 928, -99, 928, 793, 2))
+			backgrounds.append(Background('game/assets/layer2.png', (928 * j) - 928, -99, 928, 793, 2, 1))
 		elif i == 3:
-			backgrounds.append(Background('game/assets/layer3.png', (928 * j) - 928, -99, 928, 793, 3))
+			backgrounds.append(Background('game/assets/layer3.png', (928 * j) - 928, -99, 928, 793, 3, 2))
 		elif i == 4:
-			backgrounds.append(Background('game/assets/layer4.png', (928 * j) - 928, -99, 928, 793, 4))
+			backgrounds.append(Background('game/assets/layer4.png', (928 * j) - 928, -99, 928, 793, 4, 3))
 		elif i == 5:
-			backgrounds.append(Background('game/assets/layer5.png', (928 * j) - 928, -99, 928, 793, 5))
+			backgrounds.append(Background('game/assets/layer5.png', (928 * j) - 928, -99, 928, 793, 5, 4))
 		elif i == 6:
-			backgrounds.append(Background('game/assets/layer6.png', (928 * j) - 928, -99, 928, 793, 6))
+			backgrounds.append(Background('game/assets/layer6.png', (928 * j) - 928, -99, 928, 793, 6, 5))
 		elif i == 7:
-			backgrounds.append(Background('game/assets/layer7.png', (928 * j) - 928, -99, 928, 793, 7))
+			backgrounds.append(Background('game/assets/layer7.png', (928 * j) - 928, -99, 928, 793, 7, 5))
 		elif i == 8:
-			backgrounds.append(Background('game/assets/layer8.png', (928 * j) - 928, -99, 928, 793, 8))
+			backgrounds.append(Background('game/assets/layer8.png', (928 * j) - 928, -99, 928, 793, 8, 6))
 		elif i == 9:
-			backgrounds.append(Background('game/assets/layer9.png', (928 * j) - 928, -99, 928, 793, 9))
+			backgrounds.append(Background('game/assets/layer9.png', (928 * j) - 928, -99, 928, 793, 9, 6))
 
 
 # layer1 = Background('game/assets/layer1.png', 0, -99, 928, 793, 1) 
@@ -95,8 +95,8 @@ for i in range(9):
 
 # Hitboxes / Surfaces
 
-surface1 = HitBox(0 - 12000 / 2, height - 43, 12000, 43)
-crate1 = HitBox(100, surface1.rect.top - 35, 39, 35, 'game/assets/crate.png', 4, 6)
+surface1 = HitBox(-111, height - 43, 12000, 43)
+crate1 = HitBox(width - 100, surface1.rect.top - 35, 39, 35, 'game/assets/crate.png', 4, 6)
 
 
 
@@ -110,7 +110,7 @@ tops = [surface1]
 
 
 # Game
-game = Game(images=['game/assets/instructions2.png'])
+game = Game(['game/assets/instructions2.png'], width, height)
 game.images.append('game/assets/Pixel Art Plataformer Painted Style.png')
 game.images.append('game/assets/Pixel Art Runner.png')
 game.images.append('game/assets/Pixel Art Forest.png')
