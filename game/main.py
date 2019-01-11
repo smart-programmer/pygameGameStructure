@@ -11,6 +11,7 @@ clock = pygame.time.Clock()
 
 
 
+
 def main():
 
 	global surfaces
@@ -81,6 +82,7 @@ def main():
 						redhair.hitbox.rect.left = surfaces[index].right_rect.left
 					elif redhair.hitbox.rect.colliderect(surfaces[index].left_rect):
 						redhair.hitbox.rect.right = surfaces[index].left_rect.left
+						reset(redhair.hitbox, [100, 100])
 					elif redhair.hitbox.rect.colliderect(surfaces[index].top_rect):
 						redhair.hitbox.rect.bottom = surfaces[index].top_rect.top
 					elif redhair.hitbox.rect.colliderect(surfaces[index].bottom_rect):
